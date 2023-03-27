@@ -1,0 +1,87 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+<script>
+    function getCookie(name){
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if(parts.length == 2) return parts.pop().split(';').shift();
+    }
+
+    function saveChanges(id){
+        const post_body_edit = document.getElementById(`textarea_${id}`).value
+        const post_body = document.getElementById(`post_body${id}`);
+        const modal = document.getElementById(`edit_post${id}`);
+        fetch(`/edit/${id}`, {
+            method: "POST",
+            headers: {"Content-type": "application/json", "X-CSRFToken": getCookie("csrftoken")},
+            body: JSON.stringify({
+                post_body: post_body_edit
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            post_body.innerHTML = result.edited_post_data;
+            //on every modal change state like in hidden modal
+            modal.classList.remove('show');
+            modal.setAttribute('aria-hidden', 'true');
+            modal.setAttribute('style', 'display:none');
+
+            //get modal backdrops
+            const modalsBackdrops = document.getElementsByClassName ('modal-backdrop');
+
+            //remove every modal backdrop
+            for(let i=0; i<modalsBackdrops.length; i++){
+                document.body.removeChild(modalsBackdrops[i]);
+            }
+        })
+    }
+</script>
+
+    <h1 class="container">All Posts</h1>
+    
+    {% for post in post_page %}
+    <div class="allpost">
+        <h5 class="post_body" id="post_body{{ post.id }}">{{ post.post_body }}</h5>
+        <h6 class="post_details"><a href="{% url 'profile' user_id=post.post_user.id %}">{{ post.post_user }}</a> posted at {{ post.post_timestamp }}</h6>
+        <hr>
+        {% if user.is_authenticated %}
+            {% if post.post_user == user %}
+                <button class="btn btn-primary" data-toggle="modal" data-target="#edit_post{{ post.id }}">Edit</button>
+                    <div class="modal" id="edit_post{{ post.id }}" tabindex="-1" role="dialog" aria-labelledby="edit_post{{ post.id }}label" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title">Edit Post</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                            <textarea cols="60" row="4" id="textarea_{{ post.id }}" class="form-control">{{ post.post_body }}</textarea>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" onclick="saveChanges({{ post.id }})">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+              {% endif %}
+        {% endif %}
+    </div>
+    {% endfor %}
+    
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if post_page.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ post_page.previous_page_number }}">Previous</a></li>
+            {% endif %} 
+            {% if post_page.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ post_page.next_page_number }}">Next</a></li>
+            {% endif %}
+        </ul>
+      </nav>
+
+{% endblock %}

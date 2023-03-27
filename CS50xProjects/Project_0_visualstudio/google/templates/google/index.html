@@ -1,0 +1,30 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Search</title>
+        <link rel="stylesheet" href="{% static 'google/styles.css' %}" type ="text/css">
+    </head>
+    <body>
+        <div>
+            <ul class = "navbar-google">
+                <li class="navbar-item-google"><a href ="{% url 'images' %}">Images</a></li>
+                <li class="navbar-item-google"><a href = "{% url 'advanced' %}">Advanced Search</a></li>
+            </ul>
+        </div>
+        <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="google-logo" class="center">
+    </br>
+        <div >
+        <form action="https://www.google.com/search">
+            <input type="text" name="q" class="google-searchbox">
+        </div>
+        </br>
+        <div class="center">
+            <input class = "search-button" type="submit" value="Google Search">
+            <input class = "lucky-button" name="btnI" type="submit" value="I'm Feeling Lucky">
+        </div>
+        </form>
+    </body>
+</html>

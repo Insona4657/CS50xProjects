@@ -1,0 +1,32 @@
+.allpost {
+    border: 0.1px solid gray;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: 20px;
+}
+
+.new_post {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: 20px;
+}
+
+.post_details {
+    color:gray;
+    font-size: 15px;
+}
+
+.post_body {
+    font-size: 30px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    grid-row: 1 / span 2;
+}
+

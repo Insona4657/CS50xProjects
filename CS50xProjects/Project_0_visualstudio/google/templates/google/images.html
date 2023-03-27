@@ -1,0 +1,26 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Search</title>
+        <link rel="stylesheet" href="{% static 'google/styles.css' %}" type ="text/css">
+    </head>
+    <body>
+        <div>
+            <ul class = "navbar-google">
+                <li class="navbar-item-google"><a href ="{% url 'back' %}">Back</a></li>
+            </ul>
+        </div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Google_Images_2015_logo.svg/220px-Google_Images_2015_logo.svg.png" class="center">
+    </br>
+        <form action="https://images.google.com/">
+            <input type="text" name="q" class="google-searchbox">
+            <input type="hidden" name="tbm" value="isch">
+            <div class="center">
+            <input type="submit" value="Google Image Search" class="search-button">
+            </div>
+        </form>
+    </body>
+</html>

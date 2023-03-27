@@ -1,0 +1,45 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Edit Listing</h2>
+
+    <form action="{% url 'editListing' %}" method="POST">
+    {% csrf_token %}
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" name="name" class="form-control" id="name" placeholder="Item Name">
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" name="description" class="form-control" id="description" placeholder="Enter Decription of your item">
+        </div>
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="text" name="image" class="form-control" id="image" placeholder="Enter Image URL">
+        </div>
+        <div class="form-row field-price">
+            <div>
+                <label for="id_price">Price:</label>
+                <input type="number" name="price" step="any" id="id_price">   
+            </div>    
+        </div>
+        <div>
+            <label for="id_owner">Owner:</label>
+            <div class="related-widget-wrapper" data-model-ref="user">
+            <select name="owner" id="id_owner">
+            <option>{{ owner }}</option>
+            </select>
+        </div>
+        <div class="form-row field-category">
+            <div>
+                <label for="id_category">Category:</label>
+                <div class="related-widget-wrapper" data-model-ref="category">
+                <select name="category" id="id_category">
+                <option>{{ category }}</option>
+                </select>
+        </div>
+        <button class="btn btn-primary">Save</button
+    </form>
+
+    
+{% endblock %}

@@ -1,0 +1,25 @@
+textarea {
+    min-height: 400px;
+}
+
+.read {
+    background-color: white;
+    border: 1px solid black; /* Add a thin border to each list item */
+    margin-top: -1px; /* Prevent double borders */
+    padding: 12px; /* Add some padding */
+}
+
+.unread {
+    background-color: grey;
+    border: 1px solid black; /* Add a thin border to each list item */
+    margin-top: -1px; /* Prevent double borders */
+    padding: 12px; /* Add some padding */
+}
+
+.btn-success {
+    margin-right:5px;
+}
+
+.btn-danger {
+    margin-right:5px;
+}

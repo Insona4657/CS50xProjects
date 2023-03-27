@@ -1,0 +1,46 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Create New Listing</h2>
+
+    <form action="{% url 'createListing' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" name="name" class="form-control" id="name" placeholder="Item Name">
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" name="description" class="form-control" id="description" placeholder="Enter Decription of your item">
+        </div>
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="text" name="image" class="form-control" id="image" placeholder="Enter Image URL">
+        </div>
+        <div class="form-row field-price">
+            <div>
+                <label for="price">Price:</label>
+                <input type="number" class="form-control" min="0" name="price" step="any" id="price" placeholder="Price">   
+            </div>    
+        </div>
+        <div class="form-row field-price">
+            <div>
+                <label for="bid">Minimum Bid:</label>
+                <input type="number" class="form-control" min="0" name="bid" step="any" id="bid" placeholder="Minimum Bid">   
+            </div>    
+        </div>
+    </br>
+        <div class="form-row field-category">
+                <label for="category">Category:</label>
+                <div class="related-widget-wrapper" data-model-ref="category">
+                <select name="category" id="category" class="form-control">
+                    {% for cat in categories %}
+                        <option>{{ cat }}</option>
+                    {% endfor %}
+                </select>
+                </div> 
+        </div>
+    </br>
+        <button type="submit" class="btn btn-primary">Create Listing</button>
+    </form>
+{% endblock %}

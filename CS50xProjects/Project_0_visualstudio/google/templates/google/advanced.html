@@ -1,0 +1,32 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Search</title>
+        <link rel="stylesheet" href="{% static 'google/styles.css' %}" type ="text/css">
+    </head>
+    <body>
+        <div>
+            <ul class = "navbar-google">
+                <li class="navbar-item-google"><a href = "{% url 'back' %}">Back</a></li>
+            </ul>
+        </div>
+        <h1 class="Advanced_search">Advanced Search</h1>
+    </br><div class="border"></div></br>
+        <form action="https://google.com/search">
+            <p class="advanced">Find pages with...</p>
+            <p class="page-setting">all these words:             <input type="text" class="text-box"></p>
+            <p class="page-setting">this exact word or phrase:   <input type="text" class="text-box"></p>
+            <p class="page-setting">any of these words:          <input type="text" class="text-box"></p>
+            <p class="page-setting">none of these words:         <input type="text" class="text-box"></p>
+
+            <input class="btn-btn-primary" type="submit" value="Advanced Search">
+        </form>
+
+        
+   
+                
+    </body>
+</html>
