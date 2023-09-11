@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <h1>History List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Share Quantity</th>
+                <th>Price</th>
+                <th>Transaction Type</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- TODO: Loop through the database entries to display them in this table -->
+
+            {% for row in rows %}
+            <tr>
+                    <td>{{ row["symbol"] }}</td>
+                    <td>{{ row["stock_name"] }}</td>
+                    {% if row["quantity"] < 0 %}
+                        <td>{{ row["quantity"] * -1 }}</td>
+                    {% else %}
+                        <td>{{ row["quantity"] }}</td>
+                    {% endif %}
+                    {% if row["symbol"][-3:] == ".KL" %}
+                        <td>{{ row["price"] | myr }}</td>
+                    {% else %}
+                        <td>{{ row["price"] | usd }}</td>
+                    {% endif %}
+                    <td>{{ row["transaction_type"] }}</td>
+                    <td>{{ row["timestamp"] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

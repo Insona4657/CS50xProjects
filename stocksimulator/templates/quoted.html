@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quoted
+{% endblock %}
+
+{% block main %}
+    <h1>Stock Quote</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Stock Symbol</th>
+                <th>Stock Name</th>
+                <th>Stock Price</th>
+            </tr>
+        </thead>
+        <tbody>
+                <td>{{ Stock_symbol }}</td>
+                <td>{{ Stock_name }}</td>
+                {% if currency == "MYR" %}
+                    <td>{{ Stock_price | myr }}</td>
+                {% else %}
+                    <td>{{ Stock_price | usd }}</td>
+                {% endif %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('buy') }}"><button class="btn btn-primary">Go to Buy</button></a>
+
+
+{% endblock %}

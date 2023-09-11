@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block main %}
+    <h1>US Portfolio List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Average Purchase Price</th>
+                <th>Total</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <!-- TODO: Loop through the database entries to display them in this table -->
+
+                {% for row in rows %}
+                <tr>
+                    {% if row["symbol"][-3:] != ".KL" %}
+                        {% if row["quantity"] != 0 %}
+                            <td>{{ row["symbol"] }}</td>
+                            <td>{{ row["stock_name"] }}</td>
+                            <td>{{ row["quantity"] }}</td>
+                            <td>{{ row["price"] | usd }}</td>
+                            <td>{{ row["avg_price"] }}</td>
+                            {% if row["price"] == NoneType %}
+                                <td></td>
+                            {% else %}
+                            <td>{{ (row["price"] * row["quantity"]) | usd }}</td>
+                            {% endif %}
+                            
+                        {% endif %}
+                    {% endif %}
+                </tr>
+                {% endfor %}
+
+        </tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Cash</td>
+            <td>{{ USD | usd }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>TOTAL</td>
+            <td>{{ total_USD | usd }}</td>
+        </tr>
+    </table>
+
+    <h1>Malaysia Portfolio List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Average Purchase Price</th>
+                <th>Total</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <!-- TODO: Loop through the database entries to display them in this table -->
+
+                {% for row in rows %}
+                <tr>
+                    {% if row["symbol"][-3:] == ".KL" %}
+                        {% if row["quantity"] != 0 %}
+                            <td>{{ row["symbol"] }}</td>
+                            <td>{{ row["stock_name"] }}</td>
+                            <td>{{ row["quantity"] }}</td>
+                            <td>{{ row["price"] | myr }}</td>
+                            <td>{{ row["avg_price"] }}</td>
+                            {% if row["price"] == NoneType %}
+                                <td></td>
+                            {% else %}
+                            <td>{{ (row["price"] * row["quantity"]) | myr }}</td>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </tr>
+                {% endfor %}
+
+        </tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Cash</td>
+            <td>{{ MYR | myr }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>TOTAL</td>
+            <td>{{ total_MYR | myr }}</td>
+        </tr>
+    </table>
+{% endblock %}

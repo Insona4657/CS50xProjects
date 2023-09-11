@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Cash
+{% endblock %}
+
+{% block main %}
+    <h1>Add Cash</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Cash (USD) </th>
+                <th>Cash (MYR) </th>
+            </tr>
+        </thead>
+        <tbody>
+                <td>{{ cash_USD | usd }}</td>
+                <td>{{ cash_MYR | myr }}</td>
+        </tbody>
+    </table>
+    
+</br>
+    <form method="post" action="{{ url_for('add_cash') }}">
+        <label for="name">Amount to Add</label>
+        
+    </br>
+    <select name = "currency">
+        {% for row in currency %}
+            <option value = "{{ row }}">{{ row }}</option>
+        {% endfor %}
+    </select>
+</br>
+    </br>
+        <input class="input" type="text" id="cash" name="cash">
+        </br>
+    </br>
+        <button class="btn btn-primary" type = "submit">Add Cash</button>
+
+    </form>
+
+{% endblock %}

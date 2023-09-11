@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy Stocks
+{% endblock %}
+
+{% block main %}
+    <h1>Buy Stocks</h1>
+
+    <form method="post" action="{{ url_for('buy') }}">
+        <label for="name">Stock Symbol</label>
+    </br>
+        <input class="input" type="text" id="symbol" name="symbol">
+        </br>
+        <label for="month">Quantity:</label>
+    </br>
+        <input class="input" type="integer" id="shares" name="shares">
+        </br>
+    </br>
+        <button class="btn btn-primary" type = "submit">Buy</button>
+
+    </form>
+
+{% endblock %}
